@@ -1,0 +1,99 @@
+﻿@using CatStore.WebMVC.Common.Enums;
+@model CatStore.WebMVC.Models.Domain.StoreEntities.PetEntities.PetEntity
+@{
+    var petKindsSelectList = new List<SelectListItem> {
+                new SelectListItem {Value = ((int)PetKinds.Cat).ToString(), Text = PetKinds.Cat.ToString()},
+                new SelectListItem {Value = ((int)PetKinds.None).ToString(), Text = PetKinds.None.ToString()}
+            };
+}
+
+<form class="w-40" asp-action="Update" method="post">
+    <h2 class="pb-10">Update pet</h2>
+    <input type="hidden" class="input" asp-for="Id">
+    <h3 class="pb-10">Product information</h3>
+    <div class="input-container">
+        <label asp-for="Title" class="w-40">Product title</label>
+        <input type="text" asp-for="Title">
+    </div>
+    <div class="message-box pd-x-28 error">
+        <span asp-validation-for="Title"></span>
+    </div>
+
+    <div class="input-container">
+        <label asp-for="Description" class="w-40">Product description</label>
+        <input type="text" asp-for="Description">
+    </div>
+    <div class="message-box pd-x-28 error">
+        <span asp-validation-for="Description"></span>
+    </div>
+
+    <div class="input-container">
+        <label asp-for="Price" class="w-40">Product price</label>
+        <input type="number" asp-for="Price">
+    </div>
+    <div class="message-box pd-x-28 error">
+        <span asp-validation-for="Price"></span>
+    </div>
+
+    <div class="input-container">
+        <label asp-for="Image" class="w-40">Product image</label>
+        <input type="text" asp-for="Image">
+    </div>
+    <div class="message-box pd-x-28 error">
+        <span asp-validation-for="Image"></span>
+    </div>
+
+    <h3 class="pb-10">Pet information</h3>
+
+    <div class="input-container">
+        <label asp-for="PetKind" class="w-40">Pet kind</label>
+        <select name="PetKind" class="form-control" asp-items="petKindsSelectList" asp-for="PetKind"></select>
+    </div>
+    <div class="message-box pd-x-28 error">
+        <span asp-validation-for="PetKind"></span>
+    </div>
+
+    <div class="input-container">
+        <label asp-for="Name" class="w-40">Pet name</label>
+        <input type="text" asp-for="Name">
+    </div>
+    <div class="message-box pd-x-28 error">
+        <span asp-validation-for="Name"></span>
+    </div>
+
+    <div class="input-container">
+        <label asp-for="Age" class="w-40">Pet Age</label>
+        <input type="number" asp-for="Age">
+    </div>
+    <div class="message-box pd-x-28 error">
+        <span asp-validation-for="Age"></span>
+    </div>
+
+    <div class="input-container">
+        <label asp-for="IsLoving" class="w-40">Pet is loving flag</label>
+        <input type="checkbox" asp-for="IsLoving">
+    </div>
+    <div class="message-box pd-x-28 error">
+        <span asp-validation-for="IsLoving"></span>
+    </div>
+
+    <div class="input-container">
+        <label asp-for="IsPlayful" class="w-40">Pet is playful flag</label>
+        <input type="checkbox" asp-for="IsPlayful">
+    </div>
+    <div class="message-box pd-x-28 error">
+        <span asp-validation-for="IsPlayful"></span>
+    </div>
+
+    @if(TempData["msg"] != null) {
+        <div class="alert mb-1">
+            @TempData["msg"];
+        </div>
+    }
+
+    <div class="input-container">
+        <button class="btn btn-default" type="submit">Update pet</button>
+        <a class="btn btn-sec" href="/Pet/GetAllPets">All pets</a>
+    </div>
+</form>
+

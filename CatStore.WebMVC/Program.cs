@@ -1,6 +1,7 @@
-using CatStore.Repositories.Implementation;
 using CatStore.WebMVC.Models.Domain;
+using CatStore.WebMVC.Models.Domain.AuthenticationEntities;
 using CatStore.WebMVC.Repositories.Abstract;
+using CatStore.WebMVC.Repositories.Implementation;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -9,6 +10,8 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<IUserAuthenticationService, UserAuthenticationService>();
+builder.Services.AddScoped<IPetService, PetService>();
+
 builder.Services.AddDbContext<DatabaseContext>(options =>
     options.UseSqlServer(builder.Configuration
             .GetConnectionString("Connection")));

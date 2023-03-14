@@ -1,0 +1,40 @@
+﻿@model IEnumerable<CatStore.WebMVC.Models.Domain.StoreEntities.PetEntities.PetEntity>
+@{
+}
+@if(Model.Any()){
+    <div class="tbl-container">
+        <h2>Pets</h2>
+
+        <table>
+            <tr>
+                <th>Title</th>
+                <th>Name</th>
+            </tr>
+
+            @foreach(var item in Model) {
+                <tr>
+                    <td>@item.Title</td>
+                    <td>@item.Name</td>
+                    <td>
+                        <a href="/Pet/EditPet?id=@item.Id" class="btn btn-default"><i class="fa fa-edit"></i></a>
+                        <a href="/Pet/DeletePet?id=@item.Id" onclick="return window.confirm('Вы действительно хотите удалить питомца?')" class="btn btn-danger"><i class="fa fa-trash"></i></a>
+                    </td>
+                </tr>
+            }
+        </table>
+        @if(TempData["msg"] != null) {
+            <div class="alert mb-1">
+                @TempData["msg"];
+            </div>
+        }
+        <div class="input-container">
+            <a href="#" class="btn btn-sec">Back</a>
+        </div>
+    </div>
+} else {
+    <h2 class="pb-10">В базе данных животные отсутствуют</h2>
+}
+<div class="input-container">
+    <a href="/Pet/AddPet" class="btn btn-default">Add pet</a>
+    <a href="/Home/Index" class="btn btn-sec">Back</a>
+</div>

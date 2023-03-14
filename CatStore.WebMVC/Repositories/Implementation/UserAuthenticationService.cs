@@ -1,11 +1,10 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using CatStore.WebMVC.Models.Domain;
 using CatStore.WebMVC.Models.DTO;
 using CatStore.WebMVC.Repositories.Abstract;
 using System.Security.Claims;
+using CatStore.WebMVC.Models.Domain.AuthenticationEntities;
 
-namespace CatStore.Repositories.Implementation
-{
+namespace CatStore.WebMVC.Repositories.Implementation {
     public class UserAuthenticationService : IUserAuthenticationService
     {
         private readonly UserManager<ApplicationUser> userManager;
