@@ -1,5 +1,6 @@
 ﻿using CatStore.WebMVC.Common.Enums;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CatStore.WebMVC.Models.Domain.StoreEntities
 {
@@ -8,29 +9,28 @@ namespace CatStore.WebMVC.Models.Domain.StoreEntities
     /// </summary>
     public abstract class CommonProductEntity
     {
-        protected CommonProductEntity() {
-
-        }
-
         /// <summary>
         /// Идентификатор
         /// </summary>
         public int Id { get; set; }
+
         /// <summary>
         /// Заголовок
         /// </summary>
         [Required]
         public string? Title { get; set; }
+
         /// <summary>
         /// Цена
         /// </summary>
         [Required]
         public int? Price { get; set; }
+
         /// <summary>
         /// Картинка (ex. Image001.png)
         /// </summary>
-        [Required]
         public string? Image { get; set;}
+
         /// <summary>
         /// Описание товара
         /// </summary>
@@ -42,5 +42,9 @@ namespace CatStore.WebMVC.Models.Domain.StoreEntities
         /// </summary>
         [Required]
         public abstract ProductTypes? ProductType { get; }
+        
+        [Required]
+        [NotMapped]
+        public IFormFile ImageFile { get; set; }
     }
 }

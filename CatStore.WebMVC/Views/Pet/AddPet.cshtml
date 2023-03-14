@@ -7,7 +7,7 @@
             };
 }
 
-<form class="w-40" asp-action="AddPet" method="post">
+<form class="w-40" asp-action="AddPet" method="post" enctype="multipart/form-data">
     <h2 class="pb-10">Add new pet</h2>
     <h3 class="pb-10">Product information</h3>
     <div class="input-container">
@@ -35,11 +35,11 @@
     </div>
 
     <div class="input-container">
-        <label asp-for="Image" class="w-40">Product image</label>
-        <input type="text" asp-for="Image">
+        <label asp-for="ImageFile" class="w-40">Product image</label>
+        <input type="file" asp-for="ImageFile">
     </div>
     <div class="message-box pd-x-28 error">
-        <span asp-validation-for="Image"></span>
+        <span asp-validation-for="ImageFile"></span>
     </div>
 
     <h3 class="pb-10">Pet information</h3>

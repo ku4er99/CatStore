@@ -7,7 +7,7 @@
             };
 }
 
-<form class="w-40" asp-action="Update" method="post">
+<form class="w-40" asp-action="Update" method="post" enctype="multipart/form-data">
     <h2 class="pb-10">Update pet</h2>
     <input type="hidden" class="input" asp-for="Id">
     <h3 class="pb-10">Product information</h3>
@@ -36,11 +36,20 @@
     </div>
 
     <div class="input-container">
-        <label asp-for="Image" class="w-40">Product image</label>
-        <input type="text" asp-for="Image">
+        <label asp-for="ImageFile" class="w-40">Product image</label>
+        <input type="file" asp-for="ImageFile">
     </div>
+    @if(!String.IsNullOrEmpty(Model.Image)) {
+        var path = $"../Uploads/{Model.Image}";
+        <div class="img-preview">
+            <h5>Current image</h5>
+            <a href="@path">
+                <img src="@path" alt="Current product image"/>
+            </a>
+        </div>
+    }
     <div class="message-box pd-x-28 error">
-        <span asp-validation-for="Image"></span>
+        <span asp-validation-for="ImageFile"></span>
     </div>
 
     <h3 class="pb-10">Pet information</h3>

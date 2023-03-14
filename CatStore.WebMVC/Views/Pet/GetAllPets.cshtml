@@ -9,12 +9,27 @@
             <tr>
                 <th>Title</th>
                 <th>Name</th>
+                <th>Image</th>
             </tr>
 
             @foreach(var item in Model) {
                 <tr>
                     <td>@item.Title</td>
                     <td>@item.Name</td>
+                    @if(!String.IsNullOrEmpty(@item.Image)) {
+                        var path = $"../Uploads/{@item.Image}";
+                        <td>
+                            <div class="tbl-img-preview">
+                                <a href="@path">
+                                    <img src="@path" alt="Current product image" />
+                                </a>
+                            </div>
+                        </td>
+                    } else {
+                        <td>
+                            <h5>Изображение отсутствует</h5>
+                        </td>
+                    }
                     <td>
                         <a href="/Pet/EditPet?id=@item.Id" class="btn btn-default"><i class="fa fa-edit"></i></a>
                         <a href="/Pet/DeletePet?id=@item.Id" onclick="return window.confirm('Вы действительно хотите удалить питомца?')" class="btn btn-danger"><i class="fa fa-trash"></i></a>
@@ -27,9 +42,6 @@
                 @TempData["msg"];
             </div>
         }
-        <div class="input-container">
-            <a href="#" class="btn btn-sec">Back</a>
-        </div>
     </div>
 } else {
     <h2 class="pb-10">В базе данных животные отсутствуют</h2>

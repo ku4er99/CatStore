@@ -12,8 +12,11 @@ namespace CatStore.WebMVC.Controllers {
     public class PetController : Controller {
 
         private readonly IPetService _petService;
-        public PetController(IPetService petService) {
-           _petService = petService;
+        private readonly IFileService _fileService;
+
+        public PetController(IPetService petService, IFileService fileService) {
+            _petService = petService;
+            _fileService = fileService;
         }
 
         public IActionResult AddPet() {
@@ -22,6 +25,11 @@ namespace CatStore.WebMVC.Controllers {
 
         [HttpPost]
         public IActionResult AddPet(PetEntity petModel) {   
+           
+            if (!ImageIsFilling(petModel)) {
+                TempData["msg"] = "Файл не выбран";
+                return View(petModel);
+            }
             var errorMsg = String.Empty;
             var result = _petService.Add(petModel, out errorMsg);
             if (result) {
@@ -33,7 +41,18 @@ namespace CatStore.WebMVC.Controllers {
             }
             
         }
-
+        private bool ImageIsFilling(PetEntity petModel) {
+            if(petModel.ImageFile != null) {
+                var fileResult = _fileService.SaveImage(petModel.ImageFile);
+                if(fileResult.Item1 == 0) {
+                    return false;
+                }
+                var imageName = fileResult.Item2;
+                petModel.Image = imageName;
+                return true;
+            }
+            return false;
+        }
         public IActionResult EditPet(int id) {
             var data = _petService.GetById(id);
             return View(data);
@@ -41,8 +60,11 @@ namespace CatStore.WebMVC.Controllers {
 
         [HttpPost]
         public IActionResult Update(PetEntity petModel) {
-            if(!ModelState.IsValid) { return View(petModel); }
-
+            
+            if(!ImageIsFilling(petModel)) {
+                TempData["msg"] = "Файл не выбран";
+                return RedirectToAction(nameof(EditPet), new { id = petModel.Id });
+            }
             var result = _petService.Update(petModel);
             if(result) {
                 TempData["msg"] = CommonResources.Common_Updated;
