@@ -225,6 +225,7 @@ footer {
   max-width: 40%;
 }
 .img-container img {
+  float:left;
   max-width: 100%;
   height: auto;
   border-radius: 0.25rem;

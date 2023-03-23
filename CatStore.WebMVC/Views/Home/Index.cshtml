@@ -1,4 +1,5 @@
-﻿@{
+﻿@model IQueryable<CatStore.WebMVC.Models.Domain.StoreEntities.PetEntities.PetEntity>
+@{
     Layout = "_Layout";
 }
 <section class="search-bar">
@@ -7,147 +8,24 @@
         <button type="submit"><i class="fa fa-search"></i></button>
     </form>
 </section>
+<h2>Pets</h2>
 <section class="pets">
-    <div class="pet-card" onclick="window.location.href='/pet-detail.html'">
-        <div class="pet-image">
-            <img src="https://picsum.photos/id/1/200/300">
+    @foreach(var pet in Model) {
+        <div class="pet-card" onclick="window.location.href='/Home/PetDetail?petId=@pet.Id'">
+            <div class="pet-image">
+            @if (String.IsNullOrEmpty(@pet.Image)){
+                <img src="/Uploads/emptyCatImage.jpg">
+            } else {
+                <img src="/Uploads/@pet.Image">
+            }
+            </div>
+            <div class="pet-info">
+                <h4>@pet.Title</h4>
+                <h4>Вид: @pet.PetKind.ToString()</h4>
+                <h4>Имя: @pet.Name</h4>
+            </div>
         </div>
-        <div class="pet-info">
-            <h4>pet 1</h4>
-            <h4>Action, Adventure</h4>
-            <h4>John doe, max </h4>
-            <h4>director 1</h4>
-        </div>
-    </div>
-
-    <div class="pet-card">
-        <div class="pet-image">
-            <img src="https://picsum.photos/id/237/200/300">
-        </div>
-        <div class="pet-info">
-            <h4>pet 2</h4>
-            <h4>Action, Adventure</h4>
-            <h4>John doe, max </h4>
-            <h4>director 1</h4>
-        </div>
-    </div>
-
-
-    <div class="pet-card">
-        <div class="pet-image">
-            <img src="https://picsum.photos/id/237/200/300">
-        </div>
-        <div class="pet-info">
-            <h4>pet 3</h4>
-            <h4>Action, Adventure</h4>
-            <h4>John doe, max,anna, ralph, dorian </h4>
-            <h4>director 1,director 2,director 3</h4>
-        </div>
-    </div>
-
-
-    <div class="pet-card">
-        <div class="pet-image">
-            <img src="https://picsum.photos/id/237/200/300">
-        </div>
-        <div class="pet-info">
-            <h4>pet 2</h4>
-            <h4>Action, Adventure</h4>
-            <h4>John doe, max </h4>
-            <h4>director 1</h4>
-        </div>
-    </div>
-
-
-    <div class="pet-card">
-        <div class="pet-image">
-            <img src="https://picsum.photos/id/237/200/300">
-        </div>
-        <div class="pet-info">
-            <h4>pet 2</h4>
-            <h4>Action, Adventure</h4>
-            <h4>John doe, max </h4>
-            <h4>director 1</h4>
-        </div>
-    </div>
-
-
-    <div class="pet-card">
-        <div class="pet-image">
-            <img src="https://picsum.photos/id/237/200/300">
-        </div>
-        <div class="pet-info">
-            <h4>pet 2</h4>
-            <h4>Action, Adventure</h4>
-            <h4>John doe, max </h4>
-            <h4>director 1</h4>
-        </div>
-    </div>
-
-
-    <div class="pet-card">
-        <div class="pet-image">
-            <img src="https://picsum.photos/id/237/200/300">
-        </div>
-        <div class="pet-info">
-            <h4>pet 2</h4>
-            <h4>Action, Adventure</h4>
-            <h4>John doe, max </h4>
-            <h4>director 1</h4>
-        </div>
-    </div>
-
-
-    <div class="pet-card">
-        <div class="pet-image">
-            <img src="https://picsum.photos/id/237/200/300">
-        </div>
-        <div class="pet-info">
-            <h4>pet 2</h4>
-            <h4>Action, Adventure</h4>
-            <h4>John doe, max </h4>
-            <h4>director 1</h4>
-        </div>
-    </div>
-
-
-
-    <div class="pet-card">
-        <div class="pet-image">
-            <img src="https://picsum.photos/id/237/200/300">
-        </div>
-        <div class="pet-info">
-            <h4>pet 2</h4>
-            <h4>Action, Adventure</h4>
-            <h4>John doe, max </h4>
-            <h4>director 1</h4>
-        </div>
-    </div>
-
-
-    <div class="pet-card">
-        <div class="pet-image">
-            <img src="https://picsum.photos/id/237/200/300">
-        </div>
-        <div class="pet-info">
-            <h4>pet 2</h4>
-            <h4>Action, Adventure</h4>
-            <h4>John doe, max </h4>
-            <h4>director 1</h4>
-        </div>
-    </div>
-
-    <div class="pet-card">
-        <div class="pet-image">
-            <img src="https://picsum.photos/id/237/200/300">
-        </div>
-        <div class="pet-info">
-            <h4>pet 2</h4>
-            <h4>Action, Adventure</h4>
-            <h4>John doe, max </h4>
-            <h4>director 1</h4>
-        </div>
-    </div>
+    }
 </section>
 
 <div class="pagination">

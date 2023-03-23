@@ -1,0 +1,29 @@
+﻿@model CatStore.WebMVC.Models.Domain.StoreEntities.PetEntities.PetEntity
+@{
+    string petCharacter = "";
+    petCharacter += Model.IsLoving ? "Любвиобильный(ая), " : "Нелюбвиобильный(ая), ";
+    petCharacter += Model.IsPlayful ? "игривый(ая)" : "неигривый(ая)";
+}
+<div class="pet-detail w-80 m-auto">
+    <div class="img-container">
+        @if(String.IsNullOrEmpty(Model.Image)) {
+            <img src="/Uploads/emptyCatImage.jpg">
+        } else {
+            <img src="/Uploads/@Model.Image">
+        }
+    </div>
+
+    <div class="detail-container">
+        <h4>Title: @Model.Title</h4>
+        <h4>Description: @Model.Description</h4>
+        <h4>ProductType: @Model.ProductType.ToString()</h4>
+        <h4>Price: @Model.Price $</h4>
+        <h4>Pet kind: @Model.PetKind.ToString()</h4>
+        <h4>Name: @Model.Name</h4>
+        <h4>Age: @Model.Age</h4>
+        <h4>Character: @petCharacter</h4>
+    </div>
+</div>
+<div class="w-80 m-auto">
+    <a href="/Home/Index" class="btn btn-default">Back</a>
+</div>
