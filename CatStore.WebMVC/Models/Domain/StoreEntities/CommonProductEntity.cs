@@ -18,13 +18,13 @@ namespace CatStore.WebMVC.Models.Domain.StoreEntities
         /// Заголовок
         /// </summary>
         [Required]
-        public string? Title { get; set; }
+        public string Title { get; set; } = string.Empty;
 
         /// <summary>
         /// Цена
         /// </summary>
         [Required]
-        public int? Price { get; set; }
+        public int Price { get; set; }
 
         /// <summary>
         /// Картинка (ex. Image001.png)

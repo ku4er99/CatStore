@@ -33,7 +33,7 @@ namespace CatStore.WebMVC.Models.Domain.StoreEntities.PetEntities
         /// <summary>
         /// Имя питомца
         /// </summary>
-        public string? Name { get; set; }
+        public string Name { get; set; }
         /// <summary>
         /// Кол-во лет
         /// </summary>

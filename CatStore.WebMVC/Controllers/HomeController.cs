@@ -12,9 +12,9 @@ namespace CatStore.WebMVC.Controllers
             _petService = petService;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(string term = "", bool paging = false, int currentPage = 1)
         {
-            var allPets = _petService.GetAll();
+            var allPets = _petService.GetPetListVM(term, true, currentPage);
             return View(allPets);
         }
 
